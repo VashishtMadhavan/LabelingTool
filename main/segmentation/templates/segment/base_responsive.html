@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block css %}{{ block.super }}
+<style>body { padding-bottom: 60px; }</style>
+<link href="{{ STATIC_URL }}css/mturk.css" rel="stylesheet" />
+{% endblock %}
+
+{% comment %}
+{% block header %}
+<div class="jumbotron subhead" style="padding: 10px 0 10px">
+	<div class="container">
+		<h1>Admin preview mode</h1>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+{% endcomment %}
+
+{% block navbar %}{% endblock %}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+{% block subnav %}{% endblock %}
+{% block modals %}{% endblock %}

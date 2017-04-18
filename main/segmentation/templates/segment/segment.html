@@ -1,0 +1,74 @@
+{% extends "segment/base_fixed.html" %}
+{% load humanize %}
+{% load compress %}
+
+{% block css %}{{ block.super }}
+<style>
+	canvas { border: 1px solid #969696; }
+	body { padding: 0 }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="mt-top-nohover">
+	<div id="mt-instructions">
+		<span>
+			Instructions: carefully trace around vehicles, pedestrians, and street signs.
+			Draw polygons are all objects to complete the task.
+		</span>
+		<span class="pull-right">
+			<button type="button" id='btn-submit' class="btn btn-primary" disabled="disabled">Submit</button>
+		</span>
+	</div>
+
+	{% include "segment/controls.html" %}
+</div>
+<div id="mt-container">
+	<div class="container">
+		<div class="row">
+			<div class="span9">
+				<div id="mt-image"></div>
+			</div>
+			<div class="span3">
+				<div class="well" style="max-width: 150px; padding: 5px 0; margin-bottom: 0">
+					<ul class="nav nav-list" id="labels">
+						<li><h4>Labels</h4></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block modals %}
+	{% include "modal/modal_instructions.html" %}
+	{% include "modal/modal_loading.html" %}
+	{% include "modal/modal_error.html" %}
+	{% include "modal/modal_form.html" %}
+	{% include "modal/modal_areyousure.html" %}
+	{% include "modal/mt_modal_feedback.html" %}
+	{% include "modal/poly_modal_intersect.html" %}
+{% endblock %}
+
+{% block scripts %}
+
+{% include "segment/control_scripts.html" %}
+<script type="text/javascript">
+window.template_args = {
+	photo_url: '{{ content.url }}',
+	photo_id: {{ content.id }},
+};
+{% if min_vertices %} window.min_vertices = {{ min_vertices }};{% endif %}
+{% if labels %} window.labelHTML = '{{ labels|safe }}'; {% endif %}
+</script>
+
+{% compress js %}
+<script type="text/coffeescript" src="{{ STATIC_URL }}js/common/get_url_params.coffee"></script>
+<script type="text/coffeescript" src="{{ STATIC_URL }}js/mturk/mt_submit.coffee"></script>
+<script type="text/coffeescript" src="{{ STATIC_URL }}js/mturk/mt_segment_material.coffee"></script>
+{% endcompress %}
+
+
+{% endblock %}
