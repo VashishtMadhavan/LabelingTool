@@ -78,7 +78,6 @@ $( ->
     if feedback? and not $.isEmptyObject(feedback)
       data.feedback = JSON.stringify(feedback)
 
-    console.log data
 
     window.show_modal_loading("Submitting...", 0)
     $.ajax(
@@ -92,6 +91,9 @@ $( ->
       contentType: 'application/x-www-form-urlencoded; charset=UTF-8'
       dataType: 'json'
       success: (data, status, jqxhr) ->
+        console.log "TEMPLATE_ARGS"
+        console.log window.template_args.photo_id
+        
         new_url = "/question/#{window.template_args.photo_id}"
         if data.result == "success"
           window.location = new_url

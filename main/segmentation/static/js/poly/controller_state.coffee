@@ -40,14 +40,19 @@ class ControllerState
     # gui elements
     @stage_ui = new StageUI(@ui, args)
     @closed_polys = []  # PolygonUI elements
-    window.labels = []
     @open_poly = null
     @sel_poly = null
     @saved_point = null  # start of drag
 
+    #if windows.labels exist add to ledger
+    for lab in window.labels
+      temp = $('<li align="center">').text(lab)
+      $("#labels").append(temp)
+
   # return data that will be submitted
   get_submit_data: =>
     results_list = []
+    label_list = []
     for poly in @closed_polys
       points_scaled = []
       for p in poly.poly.points
@@ -57,17 +62,21 @@ class ControllerState
           p.y / @stage_ui.size.height)))
       results_list.push(points_scaled)
 
+    for lab in window.labels
+      label_list.push(lab[0].innerText)
+
     results = {}
+    labs  = {}
     time_ms = {}
     time_active_ms = {}
     results[@photo_id] = results_list
-    labels[@photo_id] = window.labels
+    labs[@photo_id] = label_list
     time_ms[@photo_id] = (p.time_ms for p in @closed_polys)
     time_active_ms[@photo_id] = (p.time_active_ms for p in @closed_polys)
 
     version: '1.0'
     results: JSON.stringify(results)
-    labels: JSON.stringify(labels)
+    labs: JSON.stringify(labs)
     time_ms: JSON.stringify(time_ms)
     time_active_ms: JSON.stringify(time_active_ms)
     action_log: @log.get_submit_data()
@@ -174,9 +183,9 @@ class ControllerState
         label: "Choose a Label for the Segment"
         body: window.labelHTML
         yes: ->
-          @temp = $("<li>").text($('#label_list :selected').text())
-          $("#labels").append(@temp)
-          window.labels.push(@temp)
+          temp = $('<li align="center">').text($('#label_list :selected').text())
+          $("#labels").append(temp)
+          window.labels.push(temp)
       )
       # maybe add some update call buttons here
       poly
@@ -213,6 +222,9 @@ class ControllerState
       for p,i in @closed_polys
         if p.id == @sel_poly.id
           @closed_polys.splice(i, 1)
+          @temp = window.labels[i]
+          $("#labels").find(@temp).remove()
+          window.labels.splice(i, 1)
           @sel_poly?.remove_all()
           @sel_poly = null
           break

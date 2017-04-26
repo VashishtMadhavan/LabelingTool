@@ -3,8 +3,7 @@
 {% block header %}
 <div class="jumbotron masthead" id="overview">
 	<div class="container">
-		<h1>BDD Annotation Tool</h1>
-		<h2><a href="http://www.eecs.berkeley.edu/Research/Projects/CS/vision/" target="_blank">UC Berkeley</a></h2>
+		<h1><a href='http://bdd.berkeley.edu/'> Berkeley Deep Drive Labeling Platform</a></h1>
 	</div>
 </div>
 {% endblock %}
@@ -13,22 +12,14 @@
 {% block content %}
 <div class="row">
 	<div class="span12">
-		<p class="lead">This driving interface is used for segmentation of drivable regions in images</p>
-	</div>
-</div>
-<div class="row">
-	<div class="span12">
-		<ul>
-			<li>Total Images: 0</li>
-			<li>Total Images Annotated: 0</li>
-		</ul>
+		<p class="lead">An Open-Source annotation platform annotation of driving images</p>
 	</div>
 </div>
 <div class="row">
         <div class="span12">
-        <a class="lead" href="/segment/{{ next_photo }}">Labeling Interface</a>
+        <a class="lead" href="/segment/{{ label_image }}">Labeling Interface</a>
         <br><br>
-        <a class="lead" href="/review/{{ next_photo }}">Review Interface</a>
+        <a class="lead" href="/review/{{ review_image }}">Review Interface</a>
 	    <br><br>
 	</div>
 </div>

@@ -26,9 +26,9 @@ iframe { border: 1px solid #969696; }
 	vertical-align: middle;
 }
 #mt-instructions {
-	background-color: rgba(255, 207, 33, 0.85);
+	background-color: #08c;
 	font-weight: bold;
-	padding: 8px;
+	padding: 15px;
 	margin: 0px;
 }
 #mt-instructions > .btn {

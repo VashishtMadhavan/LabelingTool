@@ -5,25 +5,25 @@
 <div id="ui-controls" class="ui-controls-top">
 	<span class="btn-group" data-toggle="buttons-radio">
 		<button id='btn-draw' type="button" class="btn" disabled="disabled">
-			<i class="icon-pencil"></i> Draw (D)</button>
+			<i class="icon-edit"></i> Draw </button>
 		<button id='btn-edit' type="button" class="btn" disabled="disabled">
-			<i class="icon-move"></i> Adjust (A)</button>
+			<i class="icon-move"></i> Adjust</button>
 	</span>
 	<span class="btn-group">
 		<button id='btn-undo' type="button" disabled="disabled" class="btn">
-			<i class="icon-circle-arrow-left"></i> Undo (Ctrl-Z)</button>
+			<i class="icon-repeat"></i> Undo </button>
 		<button id='btn-redo' type="button" disabled="disabled" class="btn">
-			<i class="icon-circle-arrow-right"></i> Redo (Ctrl-Y)</button>
+			<i class="icon-share-alt"></i> Redo</button>
 	</span>
 	<span class="btn-group">
 		<button id='btn-close' type="button" disabled="disabled" class="btn">
-			<i class="icon-ok-sign"></i> Close (Right-click)</button>
+			<i class="icon-ok"></i> Close</button>
 		<button id='btn-delete' type="button" disabled="disabled" class="btn">
-			<i class="icon-remove"></i> Delete (Delete)</button>
+			<i class="icon-trash"></i> Delete</button>
 	</span>
 	<span class="btn-group">
 		<button id='btn-zoom-reset' type="button" disabled="disabled" class="btn">
-			<i class="icon-resize-small"></i> Reset Zoom (Esc)</button>
+			<i class="icon-zoom-out"></i> Reset Zoom</button>
 	</span>
 
 {% if extra_ui_controls %}
@@ -32,7 +32,7 @@
 
 {% if instructions %}
 	<span class="pull-right">
-		<a href="#modal-instructions" role="button" class="btn btn-warning" data-toggle="modal">Instructions</a>
+		<a href="#modal-instructions" role="button" class="btn btn-primary" data-toggle="modal"><em>Instructions</em></a>
 	</span>
 {% endif %}
 </div>
