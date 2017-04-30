@@ -55,7 +55,8 @@ def review(request, image_id):
         results = ast.literal_eval(request.POST['results'])
         labels = ast.literal_eval(request.POST['labs'])
 
-        #TODO: make sure to delete old segments
+        imObj = Image.objects.get(id=image_id)
+        Segment.objects.filter(image=imObj).delete()
 
         save_segments(image_id, results, labels, reviewing=True)
         return json_success_response()
@@ -66,8 +67,12 @@ def review(request, image_id):
         labels = [str(s.label.name) for s in segments]
         coords = []
         for s in segments:
-            points = [float(x) for x in s.coords.split(',')]
-            coords.append(points)
+            values = [float(x) for x in s.coords.split(',')]
+            c = []
+            for i in range(0, len(values),2):
+                temp = {'x': values[i], 'y': values[i+1]}
+                c.append(temp)
+            coords.append(c)
 
         context = {}
         context['content'] = {'id': image_id, 'url': image.image.url}

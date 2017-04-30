@@ -58,7 +58,8 @@
 
 {% include "segment/control_scripts.html" %}
 <script type="text/javascript">
-window.labels = []
+window.labels = [];
+window.coords = [];
 window.template_args = {
 	photo_url: '{{ content.url }}',
 	photo_id: {{ content.id }}

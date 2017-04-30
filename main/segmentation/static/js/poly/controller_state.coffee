@@ -49,6 +49,22 @@ class ControllerState
       temp = $('<li align="center">').text(lab)
       $("#labels").append(temp)
 
+
+    #for review module --> if there are already segmented items add them to the canvas
+    for coords in window.coords
+      for value,index in coords
+        coords[index]['x'] = coords[index]['x'] * template_args.width
+        coords[index]['y'] = coords[index]['y'] * template_args.height
+      @create_poly(coords)
+      @open_poly.time_ms = @open_poly.timer.time_ms()
+      @open_poly.time_active_ms = @open_poly.timer.time_active_ms()
+      poly = @open_poly
+      @open_poly.poly.close()
+      @open_poly.remove_anchors()
+      @closed_polys.push(@open_poly)
+      @open_poly = null
+      @update_buttons()
+    @zoom_reset()
   # return data that will be submitted
   get_submit_data: =>
     results_list = []
@@ -180,7 +196,7 @@ class ControllerState
       @open_poly = null
       @update_buttons()
       window.show_modal_form(
-        label: "Choose a Label for the Segment"
+        label: "Label this Segment"
         body: window.labelHTML
         yes: ->
           temp = $('<li align="center">').text($('#label_list :selected').text())
@@ -204,8 +220,8 @@ class ControllerState
   unclose_poly: ->
     if @draw_mode and not @open_poly? and @num_polys() > 0
       @open_poly = @closed_polys.pop()
-      @temp = window.labels.pop()
-      $("#labels").find(@temp).remove()
+      window.labels.pop()
+      $("#labels").children().eq(-1).remove()
       @open_poly.poly.unclose()
       @update_buttons()
       @open_poly
@@ -222,8 +238,7 @@ class ControllerState
       for p,i in @closed_polys
         if p.id == @sel_poly.id
           @closed_polys.splice(i, 1)
-          @temp = window.labels[i]
-          $("#labels").find(@temp).remove()
+          $("#labels").children().eq(i + 2).remove()
           window.labels.splice(i, 1)
           @sel_poly?.remove_all()
           @sel_poly = null
