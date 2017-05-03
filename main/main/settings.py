@@ -30,7 +30,7 @@ USE_TZ = True
 ENABLE_SSL = True
 SITE_ID = 1
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["leviathan.ist.berkeley.edu"]
 # Application definition
 
 INSTALLED_APPS = (
@@ -41,7 +41,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'south',
     'compressor',
     'segmentation',
 )
@@ -58,6 +57,21 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'main.urls'
 WSGI_APPLICATION = 'main.wsgi.application'
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -98,5 +112,8 @@ COMPRESS_PRECOMPILERS = (
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 MEDIA_ROOT = os.path.join(DATA_DIR, 'media/')
 MEDIA_URL = '/media/'
-STATIC_URL = os.path.join(DATA_DIR, 'static/')
-COMPRESS_ROOT = STATIC_URL
+STATICFILES_DIRS = [
+    os.path.join(DATA_DIR, "static"),
+]
+STATIC_URL= '/static/'
+COMPRESS_ROOT = os.path.join(DATA_DIR, 'static/')

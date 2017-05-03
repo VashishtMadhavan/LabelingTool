@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
@@ -9,11 +10,11 @@
 	<meta name="description" content='{% if head_description %}{{ head_description }}{% else %}BDD Tool for Extracting Object Segmentations from Driving Images{% endif %}'/>
 	<meta name="author" content="{% if head_author %}{{ head_author }}{% else %}UC Berkeley{% endif %}"/>
 
-	<link href="{{ STATIC_URL }}css/jquery-ui-1.9.1.custom.min.css" rel="stylesheet" type="text/css"/>
-	<link href="{{ STATIC_URL }}css/bootstrap-2.2.1.min.css" rel="stylesheet" type="text/css"/>
-	<link rel="icon" href="{{STATIC_URL}}img/bdd.png" type="image/png">
+	<link href="{% static "css/jquery-ui-1.9.1.custom.min.css" %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static  "css/bootstrap-2.2.1.min.css" %}" rel="stylesheet" type="text/css"/>
+	<link rel="icon" href="{% static "img/bdd.png" %}" type="image/png">
 	{% block css_responsive %}
-	<link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="{% static "css/bootstrap-responsive.min.css" %}" rel="stylesheet" type="text/css"/>
 	{% endblock %}
 
 	{% block css %}

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block css %}{{ block.super }}
 <style>body { padding-bottom: 60px; }</style>
-<link href="{{ STATIC_URL }}css/mturk.css" rel="stylesheet" />
+<link href="{% static "css/mturk.css" %}" rel="stylesheet" />
 {% endblock %}
 
 {% comment %}

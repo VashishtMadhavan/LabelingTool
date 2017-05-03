@@ -38,6 +38,9 @@ def segment(request, image_id):
     else:
     	response = browser_check(request)
     	image = Image.objects.get(id=image_id)
+	print image
+	print image_id
+        print image.image.url
 
     	context = {}
     	context['content'] = {'id': image_id, 'url': image.image.url}

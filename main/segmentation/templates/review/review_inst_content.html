@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load static %}
 
 <h2>Reviewing Images</h2> 
 
@@ -16,13 +17,13 @@ segments also have labels which are listed in the sidebar on the left hand side.
 		<ul class="thumbnails">
 			<li class="span4"> <div class="thumbnail"><p class="caption">
 				<span class="badge">1</span> Click on the object boundary</p>
-				<img src="{{ STATIC_URL }}img/draw1.png" alt=""></div> </li>
+				<img src="{% static "img/draw1.png" %}" alt=""></div> </li>
 			<li class="span4"> <div class="thumbnail"><p class="caption">
 				<span class="badge">2</span>Click along the object boundary</p>
-				<img src="{{ STATIC_URL }}img/draw2.png" alt=""></div> </li>
+				<img src="{% static "img/draw2.png" %}" alt=""></div> </li>
 			<li class="span4"> <div class="thumbnail"><p class="caption">
 				<span class="badge">3</span> Click Close when finished</p>
-				<img src="{{ STATIC_URL }}img/draw3.png" alt=""></div> </li>
+				<img src="{% static "img/draw3.png" %}" alt=""></div> </li>
 		</ul>
 	</div>
 </div>
@@ -36,13 +37,13 @@ When you are done adjusting, switch back to &quot;Draw&quot; mode to draw more p
 		<ul class="thumbnails">
 			<li class="span4"> <div class="thumbnail"><p class="caption">
 				<span class="badge">1</span> Switch to &quot;Adjust&quot; mode.</p>
-				<img src="{{ STATIC_URL }}img/adjust1.png" alt=""></div> </li>
+				<img src="{% static "img/adjust1.png" %}" alt=""></div> </li>
 			<li class="span4"> <div class="thumbnail"><p class="caption">
 				<span class="badge">2</span> Click on the polygon.</p>
-				<img src="{{ STATIC_URL }}img/adjust2.png" alt=""></div> </li>
+				<img src="{% static "img/adjust2.png" %}" alt=""></div> </li>
 			<li class="span4"> <div class="thumbnail"><p class="caption">
 				<span class="badge">3</span> Drag the small white circles.</p>
-				<img src="{{ STATIC_URL }}img/adjust3.png" alt=""></div> </li>
+				<img src="{% static "img/adjust3.png" %}" alt=""></div> </li>
 		</ul>
 	</div>
 </div>
@@ -53,19 +54,19 @@ When you are done adjusting, switch back to &quot;Draw&quot; mode to draw more p
 <div class="row-fluid">
 	<div class="span6">
 		<div class="thumbnail">
-			<img src="{{ STATIC_URL }}img/good1.png"  alt="" />
+			<img src="{% static "img/good1.png" %}"  alt="" />
 		</div>
 	</div>
 	<div class="span6">
 		<div class="thumbnail">
-			<img src="{{ STATIC_URL }}img/good2.png"  alt="" />
+			<img src="{% static "img/good2.png" %}"  alt="" />
 		</div>
 	</div>
 </div>
 <div class="row-fluid">
 	<div class="span9">
 		<div class="thumbnail">
-			<img src="{{ STATIC_URL }}img/good3.png"  alt="" />
+			<img src="{% static "img/good3.png" %}"  alt="" />
 		</div>
 	</div>
 </div>
@@ -78,19 +79,19 @@ to seperate objects as best as possible</p>
 <div class="row-fluid">
 	<div class="span6">
 		<div class="thumbnail">
-			<img src="{{ STATIC_URL }}img/bad1.png"  alt="" />
+			<img src="{% static "img/bad1.png" %}"  alt="" />
 		</div>
 	</div>
 	<div class="span6">
 		<div class="thumbnail">
-			<img src="{{ STATIC_URL }}img/bad2.png"  alt="" />
+			<img src="{% static "img/bad2.png" %}"  alt="" />
 		</div>
 	</div>
 </div>
 <div class="row-fluid">
 	<div class="span9">
 		<div class="thumbnail">
-			<img src="{{ STATIC_URL }}img/bad3.png"  alt="" />
+			<img src="{% static "img/bad3.png" %}"  alt="" />
 		</div>
 	</div>
 </div>
@@ -110,7 +111,7 @@ can click &quot;Close&quot; to connect the first and last point.</p>
 <h2>Other controls</h2>
 <div class="row-fluid">
 	<div class="span12">
-		<img src="{{ STATIC_URL }}img/controls.png" alt="" />
+		<img src="{% static "img/controls.png" %}" alt="" />
 	</div>
 </div>
 <div class="row-fluid">
