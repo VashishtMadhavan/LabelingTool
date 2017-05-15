@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="row">
+	<div class="span12">
+	<p class="lead">Would you like to label the image you just annotated or continue segmenting other images?</p>	
+</div>
+</div>
+<div class="row">
+    <div class="span12">
+        {% if not reviewed %} 
+            <p>You have rejected the annotation. Thanks for your time!</p>
+        {% else %}
+            <p> You have accepted the annotation. Thanks for your time</p>
+        {% endif %}
+
+        <a href="/review/{{ next_image_id }}">Review Next Photo</a><br><br>
+        <a href="/">Go Back to Home Page</a>
+    </div>
+</div>
+{% endblock content %}

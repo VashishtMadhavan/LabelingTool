@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^segment/(?P<image_id>\d+)/$', views.segment, name='segment'),
     url(r'^review/(?P<image_id>\d+)/$', views.review, name='review'),
     url(r'^question/(?P<image_id>\d+)/$',views.question, name="question"),
+    url(r'^question_review/(?P<image_id>\d+)/$',views.question_review, name="question_review"),
     url(r'^review/(?P<image_id>\d+)/$', views.review, name='review'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

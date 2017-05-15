@@ -34,6 +34,7 @@ class ControllerState
     @btn_edit = if args.btn_edit? then args.btn_edit else '#btn-edit'
     @btn_close = if args.btn_close? then args.btn_close else '#btn-close'
     @btn_submit = if args.btn_submit? then args.btn_submit else '#btn-submit'
+    @btn_reject = if args.btn_reject? then args.btn_reject else '#btn-reject'
     @btn_delete = if args.btn_delete? then args.btn_delete else '#btn-delete'
     @btn_zoom_reset = if args.btn_zoom_reset? then args.btn_zoom_reset else '#btn-zoom-reset'
 
@@ -44,10 +45,13 @@ class ControllerState
     @sel_poly = null
     @saved_point = null  # start of drag
 
-    #if windows.labels exist add to ledger
-    for lab in window.labels
+    #if this is the review module and we have labels
+    @labs = window.labels.slice()
+    window.labels = []
+    for lab in @labs
       temp = $('<li align="center">').text(lab)
       $("#labels").append(temp)
+      window.labels.push(temp)
 
 
     #for review module --> if there are already segmented items add them to the canvas
@@ -287,6 +291,7 @@ class ControllerState
     set_btn_enabled(@btn_edit, false)
     set_btn_enabled(@btn_close, false)
     set_btn_enabled(@btn_submit, false)
+    set_btn_enabled(@btn_reject, false)
 
   # update cursor only
   update_cursor: ->
@@ -312,6 +317,7 @@ class ControllerState
     enable_submit = (not window.min_shapes? or
       @num_polys() >= window.min_shapes)
     set_btn_enabled(@btn_submit, enable_submit)
+    set_btn_enabled(@btn_reject, enable_submit)
     set_btn_enabled(@btn_draw, not @loading)
     set_btn_enabled(@btn_edit, not @loading)
     set_btn_enabled(@btn_delete, @can_delete_sel())

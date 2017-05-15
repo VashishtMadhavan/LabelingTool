@@ -9,11 +9,9 @@
 </div>
 <div class="row">
         <div class="span12">
+    <p> Thank you for taking the time to annotate this image! Choose your next option</p>
 	<a href="/segment/{{ next_image_id }}">Segment Next Photo</a><br><br>
-	{% if not reviewed %} 
-	<a href="/review/{{ current_image_id }}">Review Current Photo</a><br><br>
-	{% endif %}
-	<a href="/">Home Page</a>
+	<a href="/">Go Back to Home Page</a>
 	</div>
 </div>
 {% endblock content %}

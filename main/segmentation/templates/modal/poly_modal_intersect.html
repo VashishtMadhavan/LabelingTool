@@ -9,21 +9,20 @@
 		<h3 id="poly-modal-intersect-label">Not a valid polygon!</h3>
 	</div>
 	<div class="modal-body">
-		<p>Polygons must contain at least
-		<strong>{{ min_vertices|apnumber }}</strong>
+		<p>Polygons must contain at least <strong>3</strong>
 		points and cannot intersect themselves.  Try adding more points so
 		that the first and last point can connect.</p>
 
 		<div class="thumbnail span2">
-			<img src="{% static "/img/bad-close.jpg" %}" alt=""/>
+			<img src="{% static "/img/bad1.jpg" %}" alt=""/>
 			<p class="mt-caption">This polygon cannot close.</p>
 		</div>
 		<div class="thumbnail span2">
-			<img src="{% static "/img/bad-vertex.jpg" %}" alt=""/>
+			<img src="{% static "/img/bad2.jpg" %}" alt=""/>
 			<p class="mt-caption">This edge cannot be added.</p>
 		</div>
 		<div class="thumbnail span2">
-			<img src="{% static "/img/good-close.jpg" %}" alt=""/>
+			<img src="{% static "/img/good1.jpg" %}" alt=""/>
 			<p class="mt-caption">This polygon can be closed.</p>
 		</div>
 	</div>

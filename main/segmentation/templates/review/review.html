@@ -1,0 +1,81 @@
+{% extends "segment/base_fixed.html" %}
+{% load humanize %}
+{% load compress %}
+{% load static %}
+
+{% block css %}{{ block.super }}
+<style>
+	canvas { border: 1px solid #969696; }
+	body { padding: 0 }
+  	em { color: white; }
+  	.row {
+  		max-width: 100%;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="mt-top-nohover">
+	<div id="mt-instructions">
+        <span style="font-size: 200%; background: inherit;"><a href="/"><em>BDD Labeling Tool</em></a></span>
+		<span class="pull-right">
+ 			<button type="button" id='btn-submit' class="btn btn-success" disabled="disabled"><em>Submit</em></button>
+ 			<button type="button" id='btn-reject' class="btn btn-danger" disabled="disabled"><em>Reject</em></button>	
+ 		</span>
+	</div>
+</div>
+	{% include "segment/controls.html" %}
+<div id="mt-container">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="span2">
+					<div class="sidebar">
+						<ul class="nav nav-list" id="labels">
+							<li><h3 align="center">Labels</h3></li>
+							<li class="divider"></li>
+						</ul>
+					</div>
+				</div>
+				<div class='span10'>
+					<div id="mt-image"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block modals %}
+	{% include "modal/modal_instructions.html" %}
+	{% include "modal/modal_loading.html" %}
+	{% include "modal/modal_error.html" %}
+	{% include "modal/modal_form.html" %}
+	{% include "modal/modal_areyousure.html" %}
+	{% include "modal/mt_modal_feedback.html" %}
+	{% include "modal/poly_modal_intersect.html" %}
+{% endblock %}
+
+{% block scripts %}
+
+{% include "segment/control_scripts.html" %}
+<script type="text/javascript">
+window.labels = [];
+window.coords = [];
+window.template_args = {
+	photo_url: '{{ content.url }}',
+	photo_id: {{ content.id }}
+};
+{% if min_vertices %} window.min_vertices = {{ min_vertices }}; {% endif %}
+{% if label_html %} window.labelHTML = '{{ label_html |safe }}'; {% endif %}
+{% if labels %} window.labels = {{ labels | safe }}; {% endif %}
+{% if coords %} window.coords = {{ coords | safe }}; {% endif %}
+</script>
+
+{% compress js %}
+<script type="text/coffeescript" src="{% static "js/common/get_url_params.coffee" %}"></script>
+<script type="text/coffeescript" src="{% static "js/mturk/mt_submit.coffee" %}"></script>
+<script type="text/coffeescript" src="{% static "js/mturk/mt_segment_material.coffee" %}"></script>
+{% endcompress %}
+
+{% endblock %}

@@ -21,29 +21,48 @@ def index(request):
 @ensure_csrf_cookie
 def question(request,image_id):
     context = {}
-    context['current_image_id'] = str(image_id)
-    context['reviewed'] = Image.objects.get(id=image_id).reviewed
     next_image_id = Image.objects.filter(annotated=False)[0].id
     context['next_image_id'] = str(next_image_id)
     return render(request,'question.html', context)
+
+@ensure_csrf_cookie
+def question_review(request,image_id):
+    context = {}
+    not_reviewed = Image.objects.filter(reviewed=False)
+    valid_ids = [x.id for x in not_reviewed if x != image_id]
+    context['next_image_id'] = str(valid_ids[0])
+    return render(request,'question_review.html', context)
 
 @ensure_csrf_cookie
 def segment(request, image_id):
     if request.method == 'POST':
         results = ast.literal_eval(request.POST['results'])
         labels = ast.literal_eval(request.POST['labs'])
-
+        image = Image.objects.get(id=image_id)
+        Segment.objects.filter(image=image).delete()
         save_segments(image_id, results, labels)
         return json_success_response()
     else:
     	response = browser_check(request)
     	image = Image.objects.get(id=image_id)
+        segments = image.segment_set.all()
+        labels = [str(s.label.name) for s in segments]
+        coords = []
+        for s in segments:
+            values = [float(x) for x in s.coords.split(',')]
+            c = []
+            for i in range(0, len(values),2):
+                temp = {'x': values[i], 'y': values[i+1]}
+                c.append(temp)
+            coords.append(c)
 
     	context = {}
     	context['content'] = {'id': image_id, 'url': image.image.url}
      	context['min_vertices'] = MIN_VERTICES
     	context['instructions'] = 'segment/segment_inst_content.html'
         context['label_html'] = create_label_html()
+        context['coords'] = coords
+        context['labels'] = labels
 
     	response = render(request, 'segment/segment.html', context)
     	response['x-frame-options'] = 'EXEMPT'
@@ -52,13 +71,24 @@ def segment(request, image_id):
 @ensure_csrf_cookie
 def review(request, image_id):
     if request.method == 'POST':
+        print request.POST['labs']
+        accepted = str(request.POST['accepted'])
+        if accepted == "false":
+            accepted = False
+        else:
+            accepted = True
         results = ast.literal_eval(request.POST['results'])
         labels = ast.literal_eval(request.POST['labs'])
 
         imObj = Image.objects.get(id=image_id)
-        Segment.objects.filter(image=imObj).delete()
-
-        save_segments(image_id, results, labels, reviewing=True)
+        if accepted:
+            imObj.reviewed = True
+            imObj.save()
+            Segment.objects.filter(image=imObj).delete()
+            save_segments(image_id, results, labels, reviewing=True)
+        else:
+            imObj.annotated = False
+            imObj.save()
         return json_success_response()
     else:
         response = browser_check(request)
@@ -81,7 +111,7 @@ def review(request, image_id):
         context['labels'] = labels
         context['coords'] = coords
 
-        response = render(request, 'segment/segment.html', context)
+        response = render(request, 'review/review.html', context)
         response['x-frame-options'] = 'EXEMPT'
         return response
 

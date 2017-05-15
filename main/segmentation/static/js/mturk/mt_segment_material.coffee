@@ -9,7 +9,11 @@ $( ->
 btn_submit = ->
   window.mt_submit(window.controller_ui.get_submit_data)
 
+btn_reject = ->
+  window.mt_reject(window.controller_ui.get_submit_data)
+
  # wait for everything to load before allowing submit
 $(window).on('load', ->
   $('#btn-submit').on('click', btn_submit)
+  $('#btn-reject').on('click', btn_reject)
 )
