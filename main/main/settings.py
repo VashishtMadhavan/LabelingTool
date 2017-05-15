@@ -30,7 +30,7 @@ USE_TZ = True
 ENABLE_SSL = True
 SITE_ID = 1
 
-ALLOWED_HOSTS = ["leviathan.ist.berkeley.edu"]
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
