@@ -1,10 +1,3 @@
-// Handles submitting of tasks for mturk tasks
-// Required scripts:
-//   get_url_params.coffee
-// Required templates:
-//   modal_loading.html
-//   modal_error.html
-
 window.load_start = Date.now();
 $(window).on('load', () => window.time_load_ms = +(Date.now() - window.load_start));
 
