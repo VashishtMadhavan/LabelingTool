@@ -73,9 +73,9 @@ window.template_args = {
 </script>
 
 {% compress js %}
-<script type="text/coffeescript" src="{% static "js/common/get_url_params.coffee" %}"></script>
-<script type="text/coffeescript" src="{% static "js/mturk/mt_submit.coffee" %}"></script>
-<script type="text/coffeescript" src="{% static "js/mturk/mt_segment_material.coffee" %}"></script>
+<script type="text/javascript" src="{% static "js/common/get_url_params.js" %}"></script>
+<script type="text/javascript" src="{% static "js/segment/submit.js" %}"></script>
+<script type="text/javascript" src="{% static "js/segment/segment.js" %}"></script>
 {% endcompress %}
 
 {% endblock %}

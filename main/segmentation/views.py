@@ -123,7 +123,7 @@ def review(request, image_id):
 
 # used to create selector for annotation labeling modal
 def create_label_html():
-    labels = [str(l.name) for l in LabelName.objects.all()]
+    labels = sorted([str(l.name) for l in LabelName.objects.all()])
     label_body = '<select id="label_list">'
     for l in labels:
         label_body += '<option value="%s">%s</option>' %(l,l)
