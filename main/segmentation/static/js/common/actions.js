@@ -19,40 +19,34 @@ class UndoRedo {
   }
 
   run(e) { if (e != null) {
-    console.log('run:');
-    console.log(e);
     e.run(this.ui);
     this.undo_stack.push(e);
     this.redo_stack = [];
     this.ui.s.log.action(e.entry());
-    return this.update_buttons();
+    this.update_buttons();
   } }
 
   undo() {
     if (this.can_undo()) {
       let e = this.undo_stack.pop();
-      console.log('undo:');
-      console.log(e);
       e.undo(this.ui);
       this.redo_stack.push(e);
       this.ui.s.log.action({name: 'UndoRedo.undo', event: e});
-      return this.update_buttons();
+      this.update_buttons();
     } else {
-      return this.ui.s.log.attempted({name: 'UndoRedo.undo'});
+      this.ui.s.log.attempted({name: 'UndoRedo.undo'});
     }
   }
 
   redo() {
     if (this.can_redo()) {
       let e = this.redo_stack.pop();
-      console.log('redo:');
-      console.log(e);
       e.redo(this.ui);
       this.undo_stack.push(e);
       this.ui.s.log.action({name: 'UndoRedo.redo', event: e});
-      return this.update_buttons();
+      this.update_buttons();
     } else {
-      return this.ui.s.log.attempted({name: 'UndoRedo.redo'});
+      this.ui.s.log.attempted({name: 'UndoRedo.redo'});
     }
   }
 
@@ -62,7 +56,7 @@ class UndoRedo {
   update_buttons() {
     this.ui.s.update_buttons();
     if (this.btn_undo != null) { set_btn_enabled(this.btn_undo, this.can_undo()); }
-    if (this.btn_redo != null) { return set_btn_enabled(this.btn_redo, this.can_redo()); }
+    if (this.btn_redo != null) { set_btn_enabled(this.btn_redo, this.can_redo()); }
   }
 }
 
@@ -79,16 +73,12 @@ class ActionLog {
   action(args) {
     let entry = $.extend(true, {time: new Date(), done: true}, args);
     this.entries.push(entry);
-    console.log('action:');
-    return console.log(entry);
   }
 
   // invalid action
   attempted(args) {
     let entry = $.extend(true, {time: new Date(), done: false}, args);
     this.entries.push(entry);
-    console.log('attempted:');
-    return console.log(entry);
   }
 
   get_submit_data() {

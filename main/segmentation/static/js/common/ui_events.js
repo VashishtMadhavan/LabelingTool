@@ -9,11 +9,11 @@ $(document).on('mouseover', '.hover-toggle', function() {
   out.hide();
   over.width(w);
   over.height(h);
-  return over.show();
+  over.show();
 });
 $(document).on('mouseout', '.hover-toggle', function() {
   $(this).find('.show-on-mouseout').show();
-  return $(this).find('.show-on-mouseover').hide();
+  $(this).find('.show-on-mouseover').hide();
 });
 
 // Speedup for categories pages
@@ -36,5 +36,5 @@ $(document).on('mouseout', '.hover-toggle', function() {
   ;
 
   handle_nav('subnav');
-  return handle_nav('sidenav');
+  handle_nav('sidenav');
 })();

@@ -8,7 +8,7 @@ class ActiveTimer {
 
     $(window).on('focus', () => {
       if (this.started) {
-        return this.active_start = Date.now();
+        this.active_start = Date.now();
       }
     });
 
@@ -16,7 +16,7 @@ class ActiveTimer {
       if (this.started && (this.active_start != null)) {
         this.partial_time_ms += Date.now() - this.active_start;
       }
-      return this.active_start = null;
+      this.active_start = null;
     });
   }
 
@@ -24,11 +24,11 @@ class ActiveTimer {
     this.total_start = Date.now();
     this.active_start = Date.now();
     this.partial_time_ms = 0;
-    return this.started = true;
+    this.started = true;
   }
 
   ensure_started() {
-    if (!this.started) { return this.start(); }
+    if (!this.started) {  this.start(); }
   }
 
   time_ms() {

@@ -13,7 +13,7 @@ $( function() {
       let btn_rej = $('#btn-reject').removeAttr('disabled');
       if (data_callback != null) {
         btn.on('click', window.mt_submit(data_callback));
-        return btn_rej.on('click', window.mt_reject(data_callback));
+        btn_rej.on('click', window.mt_reject(data_callback));
       }
     }
   };
@@ -24,7 +24,7 @@ $( function() {
     if (mt_submit_ready) {
       mt_submit_ready = false;
       if (disable) { $('#btn-submit').attr('disabled', 'disabled').off('click'); }
-      if (disable) { return $('#btn-reject').attr('disabled', 'disabled').off('click'); }
+      if (disable) { $('#btn-reject').attr('disabled', 'disabled').off('click'); }
     }
   };
 
@@ -32,13 +32,13 @@ $( function() {
   window.mt_submit = function(data_callback) {
     mt_submit_ready = true;
     let do_submit = mt_submit_impl(data_callback);
-    return do_submit();
+    do_submit();
   };
 
   window.mt_reject = function(data_callback) {
     mt_submit_ready = true;
     let do_submit = mt_reject_impl(data_callback);
-    return do_submit();
+    do_submit();
   };
 
   // Submit a partially completed task
@@ -90,16 +90,16 @@ $( function() {
         let new_url = `/question/${window.template_args.photo_id}`;
         if (data.result === "success") {
           window.location = new_url;
-          return setInterval((() => window.location = new_url), 5000);
+          setInterval((() => window.location = new_url), 5000);
         } else if (data.result === "error") {
-          return mt_submit_error(`There was an error contacting the server; try submitting again after a few seconds... (${data.message})`);
+          mt_submit_error(`There was an error contacting the server; try submitting again after a few seconds... (${data.message})`);
         } else {
-          return mt_submit_error("There was an error contacting the server; try submitting again after a few seconds...");
+          mt_submit_error("There was an error contacting the server; try submitting again after a few seconds...");
         }
       },
 
       error() {
-        return mt_submit_error("Could not connect to the server; try submitting again after a few seconds...");
+        mt_submit_error("Could not connect to the server; try submitting again after a few seconds...");
       }
     });
   } ;
@@ -132,7 +132,7 @@ $( function() {
       },
 
       error() {
-        return mt_submit_error("Could not connect to the server; try submitting again after a few seconds...");
+        mt_submit_error("Could not connect to the server; try submitting again after a few seconds...");
       }
     });  
   } ;
