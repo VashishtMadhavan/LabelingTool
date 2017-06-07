@@ -1,10 +1,9 @@
-# Berkley Deep Drive's Labeling Interface
+# Web-Based Segmentation Interface
 
-We present a sleek, web-based  tool for fine-grained annotation of arbitrary images.
-Although we used this for annotation of driving scenes, it is a very simple, general-purpose
+We present a sleek, web-based  tool for fine-grained annotation of arbitrary images.. It is a very simple, general-purpose
 framework for generating semantic segmentation labels. We hope this tool will speed up the 
 development of semantic segmentation datasets, by lowering the cost of annotation and the 
-amount of time needed to develop a web-based interface.
+amount of time needed to develop web deployed interfaces.
  
 This application runs a Django backend and the requirements are outlined below.
 Please look at the README in main for more details. This application requires <b> Django >= 1.11 </b>
