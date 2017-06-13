@@ -14,6 +14,9 @@ mkdir static/
 Running the command below creates adds the images in images.txt and labels in labels.txt to the database. As annotations are collected, they will be saved to the database and linked to these Image and Label objects.
 
 ```
+python manage.py migrate
+python manage.py makemigrations segmentation
+python manage.py migrate
 python manage.py shell < setup.py
 ```
 
